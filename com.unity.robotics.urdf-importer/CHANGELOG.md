@@ -4,6 +4,16 @@ All notable changes to this repository will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.5.2-xrrs.1] - 2026-10-28
+
+Fork of v0.5.2 for XR-Robot-Simulator (https://github.com/Revetronique/URDF-Importer).
+
+### Fixed
+- VHACD hull assets are named `<name>_hull_N.asset` so they no longer overwrite the visual meshes `<name>_N.asset` of STL files split at 65,535 vertices.
+- Each STL file is processed only once per import, so mesh assets are not re-created while earlier visuals and colliders still reference them.
+- STL mesh prefabs get a persistent default material (inverted null check; URP/HDRP use the robot's `Materials/Default.mat`).
+- Material assignments on mesh prefab instances are recorded as prefab overrides, so they survive saving the scene.
+
 ## Unreleased
 
 ### Upgrade Notes
