@@ -212,7 +212,9 @@ namespace Unity.Robotics.UrdfImporter
                         if (!RuntimeUrdf.IsRuntimeMode())
                         {
                             meshIndex++;
-                            string name = $"{filePath}/{templateFileName}_{meshIndex}.asset";
+                            // Use a separate suffix so hulls never overwrite the visual meshes
+                            // (<name>_0.asset, <name>_1.asset, ...) created by StlAssetPostProcessor.
+                            string name = $"{filePath}/{templateFileName}_hull_{meshIndex}.asset";
                             // Only create new asset if one doesn't exist or should overwrite
                             if ((UrdfRobotExtensions.importsettings.OverwriteExistingPrefabs || !RuntimeUrdf.AssetExists(name)) && !s_CreatedAssetNames.Contains(name))
                             {

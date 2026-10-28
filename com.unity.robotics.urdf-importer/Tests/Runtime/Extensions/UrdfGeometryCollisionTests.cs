@@ -127,7 +127,7 @@ namespace Unity.Robotics.UrdfImporter.Tests
             // Verify geometry created in Assets
             Assert.IsNotNull(AssetDatabase.FindAssets("cube t:mesh", new string[] {"Packages/com.unity.robotics.urdf-importer/Tests/Runtime/Assets/URDF/cube/meshes"}));
 
-            AssetDatabase.DeleteAsset("Packages/com.unity.robotics.urdf-importer/Tests/Runtime/Assets/URDF/cube/meshes/cube_1.asset");
+            AssetDatabase.DeleteAsset("Packages/com.unity.robotics.urdf-importer/Tests/Runtime/Assets/URDF/cube/meshes/cube_hull_1.asset");
             Object.DestroyImmediate(parent.gameObject);
         }
 
@@ -158,7 +158,7 @@ namespace Unity.Robotics.UrdfImporter.Tests
             Assert.IsNotNull(AssetDatabase.FindAssets("cube t:mesh", new string[] {"Packages/com.unity.robotics.urdf-importer/Tests/Runtime/Assets/URDF/cube/meshes"}));
 
             LogAssert.ignoreFailingMessages = false;
-            AssetDatabase.DeleteAsset("Packages/com.unity.robotics.urdf-importer/Tests/Runtime/Assets/URDF/cube/meshes/cube_1.asset");
+            AssetDatabase.DeleteAsset("Packages/com.unity.robotics.urdf-importer/Tests/Runtime/Assets/URDF/cube/meshes/cube_hull_1.asset");
             Object.DestroyImmediate(parent.gameObject);
         }
 
@@ -186,7 +186,7 @@ namespace Unity.Robotics.UrdfImporter.Tests
             // Verify geometry created in Assets
             Assert.IsNotNull(AssetDatabase.FindAssets("cube t:mesh", new string[] {"Packages/com.unity.robotics.urdf-importer/Tests/Runtime/Assets/URDF/cube/meshes"}));
 
-            AssetDatabase.DeleteAsset("Packages/com.unity.robotics.urdf-importer/Tests/Runtime/Assets/URDF/cube/meshes/cube_1.asset");
+            AssetDatabase.DeleteAsset("Packages/com.unity.robotics.urdf-importer/Tests/Runtime/Assets/URDF/cube/meshes/cube_hull_1.asset");
             Object.DestroyImmediate(parent.gameObject);
         }
 
