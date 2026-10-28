@@ -127,6 +127,8 @@ namespace Unity.Robotics.UrdfImporter
                 Mesh existingMesh = RuntimeUrdf.AssetDatabase_LoadAssetAtPath<Mesh>(meshAssetPath);
                 if (existingMesh != null)
                 {
+                    // CopySerialized also copies the (empty) name of the imported mesh.
+                    meshes[i].name = existingMesh.name;
                     RuntimeUrdf.EditorUtility_CopySerialized(meshes[i], existingMesh);
                     Object.DestroyImmediate(meshes[i]);
                 }

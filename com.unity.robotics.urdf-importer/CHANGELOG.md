@@ -4,6 +4,11 @@ All notable changes to this repository will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.5.2-xrrs.2] - 2026-10-28
+
+### Fixed
+- Updating an existing STL mesh asset in place keeps its name (the imported mesh's empty name was copied over it).
+
 ## [0.5.2-xrrs.1] - 2026-10-28
 
 Fork of v0.5.2 for XR-Robot-Simulator (https://github.com/Revetronique/URDF-Importer).
