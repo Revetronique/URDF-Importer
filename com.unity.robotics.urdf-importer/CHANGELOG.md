@@ -13,6 +13,7 @@ Fork of v0.5.2 for XR-Robot-Simulator (https://github.com/Revetronique/URDF-Impo
 - Each STL file is processed only once per import, so mesh assets are not re-created while earlier visuals and colliders still reference them.
 - STL mesh prefabs get a persistent default material (inverted null check; URP/HDRP use the robot's `Materials/Default.mat`).
 - Material assignments on mesh prefab instances are recorded as prefab overrides, so they survive saving the scene.
+- Re-importing a URDF updates existing STL mesh assets in place instead of re-creating them, so loaded prefabs and scenes keep valid mesh references (previously VHACD then failed with a NullReferenceException).
 
 ## Unreleased
 

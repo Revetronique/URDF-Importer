@@ -122,10 +122,23 @@ namespace Unity.Robotics.UrdfImporter
             for (int i = 0; i < meshes.Length; i++)
             {
                 string meshAssetPath = GetMeshAssetPath(stlFile, i);
-                RuntimeUrdf.AssetDatabase_CreateAsset(meshes[i], meshAssetPath);
+                // Re-creating an existing mesh asset destroys the loaded mesh, leaving null
+                // references in prefabs and scenes until the Editor restarts. Update it in place.
+                Mesh existingMesh = RuntimeUrdf.AssetDatabase_LoadAssetAtPath<Mesh>(meshAssetPath);
+                if (existingMesh != null)
+                {
+                    RuntimeUrdf.EditorUtility_CopySerialized(meshes[i], existingMesh);
+                    Object.DestroyImmediate(meshes[i]);
+                }
+                else
+                {
+                    RuntimeUrdf.AssetDatabase_CreateAsset(meshes[i], meshAssetPath);
+                }
                 GameObject gameObject = CreateStlGameObject(meshAssetPath, material);
                 gameObject.transform.SetParent(parent.transform, false);
             }
+            // Write meshes updated in place to disk.
+            RuntimeUrdf.AssetDatabase_SaveAssets();
             return parent;
         }
         

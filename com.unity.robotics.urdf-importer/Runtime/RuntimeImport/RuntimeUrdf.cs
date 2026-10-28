@@ -189,6 +189,17 @@ public static class RuntimeUrdf
         return null;
     }
 
+    public static void EditorUtility_CopySerialized(UnityEngine.Object source, UnityEngine.Object dest)
+    {
+#if UNITY_EDITOR
+        if (!IsRuntimeMode())
+        {
+            EditorUtility.CopySerialized(source, dest);
+            EditorUtility.SetDirty(dest);
+        }
+#endif
+    }
+
     public static void PrefabUtility_RecordPrefabInstancePropertyModifications(UnityEngine.Object targetObject)
     {
 #if UNITY_EDITOR
