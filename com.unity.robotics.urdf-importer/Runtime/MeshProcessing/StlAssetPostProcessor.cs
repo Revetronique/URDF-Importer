@@ -88,12 +88,22 @@ namespace Unity.Robotics.UrdfImporter
         {
 #if UNITY_EDITOR
             // also save the material in the Assets
-            if (!RuntimeUrdf.IsRuntimeMode() && MaterialExtensions.GetRenderPipelineType() == MaterialExtensions.RenderPipelineType.Standard)
+            if (!RuntimeUrdf.IsRuntimeMode())
             {
-                s_DefaultDiffuse = RuntimeUrdf.AssetDatabase_GetBuiltinExtraResource<Material>("Default-Diffuse.mat");
+                if (MaterialExtensions.GetRenderPipelineType() == MaterialExtensions.RenderPipelineType.Standard)
+                {
+                    return RuntimeUrdf.AssetDatabase_GetBuiltinExtraResource<Material>("Default-Diffuse.mat");
+                }
+                // URP/HDRP: the mesh prefab can only keep a reference to a material asset,
+                // so use the robot's default material asset instead of an in-memory one.
+                var defaultMaterial = UrdfMaterial.GetDefaultMaterial();
+                if (defaultMaterial)
+                {
+                    return defaultMaterial;
+                }
             }
 #endif
-            if (s_DefaultDiffuse) 
+            if (!s_DefaultDiffuse)
             {   // Could't use the "Default-Diffuse.mat", either because of HDRP or runtime. so let's create one.
                 s_DefaultDiffuse = MaterialExtensions.CreateBasicMaterial();
             }

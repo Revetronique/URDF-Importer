@@ -86,6 +86,22 @@ namespace Unity.Robotics.UrdfImporter
 #endif
         }
 
+        /// <summary>
+        /// Returns the default material of the robot being imported, creating it if needed.
+        /// In the Editor this is the Materials/Default.mat asset next to the URDF file.
+        /// </summary>
+        public static Material GetDefaultMaterial()
+        {
+            CreateDefaultMaterial();
+#if UNITY_EDITOR
+            if (!RuntimeUrdf.IsRuntimeMode())
+            {
+                return RuntimeUrdf.AssetDatabase_LoadAssetAtPath<Material>(UrdfAssetPathHandler.GetMaterialAssetPath(DefaultMaterialName));
+            }
+#endif
+            return defaultMaterial;
+        }
+
         private static string GenerateMaterialName(Link.Visual.Material urdfMaterial)
         {
             var materialName = "";
