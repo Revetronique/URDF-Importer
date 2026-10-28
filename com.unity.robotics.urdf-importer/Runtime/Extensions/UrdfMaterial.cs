@@ -175,6 +175,9 @@ namespace Unity.Robotics.UrdfImporter
             foreach (var renderer in renderers)
             {
                 renderer.sharedMaterial = material;
+                // Renderers under a mesh prefab instance: without recording the change as an
+                // override, the material is lost when the scene or robot prefab is saved.
+                RuntimeUrdf.PrefabUtility_RecordPrefabInstancePropertyModifications(renderer);
             }
         }
 

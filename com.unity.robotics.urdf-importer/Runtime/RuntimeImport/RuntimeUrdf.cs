@@ -189,6 +189,16 @@ public static class RuntimeUrdf
         return null;
     }
 
+    public static void PrefabUtility_RecordPrefabInstancePropertyModifications(UnityEngine.Object targetObject)
+    {
+#if UNITY_EDITOR
+        if (!IsRuntimeMode() && PrefabUtility.IsPartOfPrefabInstance(targetObject))
+        {
+            PrefabUtility.RecordPrefabInstancePropertyModifications(targetObject);
+        }
+#endif
+    }
+
     public static T AssetDatabase_GetBuiltinExtraResource<T>(string path) where T : UnityEngine.Object 
     {
 #if UNITY_EDITOR
