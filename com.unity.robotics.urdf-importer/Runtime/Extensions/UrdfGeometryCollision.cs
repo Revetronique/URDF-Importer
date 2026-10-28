@@ -244,6 +244,7 @@ namespace Unity.Robotics.UrdfImporter
         {
             s_CreatedAssetNames.Clear();
             s_UsedTemplateFiles.Clear();
+            StlAssetPostProcessor.BeginNewUrdfImport();
         }
 
     }

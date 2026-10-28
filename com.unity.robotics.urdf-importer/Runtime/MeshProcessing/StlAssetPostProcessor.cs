@@ -13,8 +13,11 @@ limitations under the License.
 */ 
 
 using UnityEngine;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using Object = UnityEngine.Object;
 
 namespace Unity.Robotics.UrdfImporter
 {
@@ -27,9 +30,29 @@ namespace Unity.Robotics.UrdfImporter
     public class StlAssetPostProcessor
     {
         private static Material s_DefaultDiffuse = null;
+        private static readonly HashSet<string> s_ProcessedStlFiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>
+        /// Clears the set of STL files processed during the current URDF import.
+        /// </summary>
+        public static void BeginNewUrdfImport()
+        {
+            s_ProcessedStlFiles.Clear();
+        }
+
+        /// <summary>
+        /// True if the STL file was already processed during the current URDF import.
+        /// Processing it again would re-create its mesh assets and break references to them
+        /// held by objects created earlier in the same import.
+        /// </summary>
+        public static bool IsProcessedInCurrentImport(string stlFile)
+        {
+            return s_ProcessedStlFiles.Contains(stlFile);
+        }
 
         public static void PostprocessStlFile(string stlFile)
         {
+            s_ProcessedStlFiles.Add(stlFile);
             var stlFileLowercase = stlFile.ToLower();
             if (stlFileLowercase.StartsWith("assets"))
             {
